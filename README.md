@@ -18,7 +18,7 @@ For the tests,
 Usage
 -----
 
-```python3
+```python
 from sphconvolve import convolve_positions
 
 convolved = convolve_positions(
