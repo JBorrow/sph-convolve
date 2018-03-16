@@ -59,10 +59,15 @@ def convolve_positions(y, h, N_neigh=48, dim=3):
 
     kernel = cubic_spline_discrete(h, N_neigh, dim)
 
-    convolved = np.convolve(y, kernel)
+    y_left = np.ones(N_neigh) * y[0]
+    y_right = np.ones(N_neigh) * y[-1]
+
+    y_all = np.hstack([y_left, y, y_right])
+
+    convolved = np.convolve(y_all, kernel)
 
     # We get some elements on the L/R that are 'spurious' in this context.
-    lr = int(N_neigh / 2)
+    lr = int(N_neigh / 2) + N_neigh
 
     return convolved[lr:-lr]
 
